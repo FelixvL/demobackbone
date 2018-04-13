@@ -27,6 +27,8 @@
                 });
                 var song = new Song({color:'pink'});
                 song.set({color:'white'});
+                song.set({optreden:'fred'});
+                song.get('optreden');
                 console.log(song.color);
                 var song1 = new Song('twee');
                 var song2 = new Song('ricardo vilanodoz');
@@ -38,6 +40,42 @@
                 console.log(song.get('length'));
                 console.log(song.length);
                 console.log(song);
+            }
+            function probeersel2(){
+                var Boot = Backbone.Model.extend({
+                    verlengen: function() {
+                        alert();
+                        this.set({bootlengte: 35});
+                    }
+                });
+                var boot = new Boot();
+                boot.verlengen();
+                console.log(boot.get('bootlengte'));
+                console.log(boot.attributes);
+                console.log(boot.has('bootbreedte'));
+                console.log(boot.has('bootlengte'));
+            }
+            function probeersel3(){
+                var Kip = Backbone.Model.extend({
+                    initialize:function(){
+                        this.set('snavellengte', 124);
+                        this.on('change', function(){
+                            console.log('changecallback');
+                        });
+                        this.on('kakelen', function(){
+                            console.log('kakelcallback');
+                        });
+                    },
+                    kakelen : function(){
+                        console.log('aan het kakalen');
+                    }
+                });
+                var kip = new Kip();
+                console.log(kip.attributes);
+                kip.set('snavellengte', 35);
+                kip.kakelen();
+                console.log(kip.get('snavellengte'));
+                console.log(kip.previous('snavellengte'))
             }
         </script>
         <style>
@@ -74,6 +112,8 @@
         <div class="container">
             <div class="content">
                 <input type="button" value="start proberen" onclick="proberen()">
+                <br>s<input type="button" value="start proberen 2" onclick="probeersel2()">
+                <br>s<input type="button" value="start proberen 3" onclick="probeersel3()">
                 <div class="title" id="iets">Laravel 5</div>
             </div>
         </div>
