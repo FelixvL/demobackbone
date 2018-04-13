@@ -77,6 +77,37 @@
                 console.log(kip.get('snavellengte'));
                 console.log(kip.previous('snavellengte'))
             }
+            function probeersel4(){
+                var Draak = Backbone.Model.extend({
+                    validate: function(attrs) {
+                        if (attrs.prinses){
+                            return true; //geeft false
+                        }else{
+                            alert('geen prinses');
+                            return false;
+                        }
+                    },
+                    initialize:function(){
+                        this.on("invalid", function(model, error) {
+                            alert(model + " " + error);
+                        });
+                        a('draak is gemaakt');
+                    }
+                });
+                var draak = new Draak();
+                draak.set('prinses','neeltje');
+                a(draak.isValid());
+                draak.clear();
+                a('cleared');
+                a(draak.isValid());
+                a(draak.has('prinses'));
+                console.log(draak);
+                
+            }
+            function a(detekst){
+                var deOutput = document.getElementById('output');
+                deOutput.innerHTML = deOutput.innerHTML + '<br>' + detekst;
+            }
         </script>
         <style>
             html, body {
@@ -114,8 +145,10 @@
                 <input type="button" value="start proberen" onclick="proberen()">
                 <br>s<input type="button" value="start proberen 2" onclick="probeersel2()">
                 <br>s<input type="button" value="start proberen 3" onclick="probeersel3()">
+                <br>s<input type="button" value="start proberen 3" onclick="probeersel4()">
                 <div class="title" id="iets">Laravel 5</div>
             </div>
         </div>
+        <div id="output"></div>
     </body>
 </html>
