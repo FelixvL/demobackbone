@@ -17,9 +17,13 @@
                         alert("in jojo");
                         var cssColor = prompt("Please enter a CSS color:");
                         this.set({color: cssColor});
-                    }
+                    },
+                    color:'orange'
+                   
                 });
-                var song = new Song('een');
+                var song = new Song({color:'pink'});
+                song.set({color:'white'});
+                console.log(song.color);
                 var song1 = new Song('twee');
                 var song2 = new Song('ricardo vilanodoz');
                 var song3 = new Song('tiesto');
