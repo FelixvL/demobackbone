@@ -9,14 +9,22 @@
         <script src="{{URL::asset('/includes/backbone.js')}}"></script>
         <script>
             function proberen(){
-                alert("Hij doet het");
-                $('#iets').hide();
                 var Song =  Backbone.Model.extend({
-                initialize: function() {
-                        console.log("Song gemaakt");
+                    initialize: function(test) {
+                        console.log("Song gemaakt"+test);
+                    },
+                    jojo: function() {
+                        alert("in jojo");
+                        var cssColor = prompt("Please enter a CSS color:");
+                        this.set({color: cssColor});
                     }
                 });
-                var song = new Song();
+                var song = new Song('een');
+                var song1 = new Song('twee');
+                var song2 = new Song('ricardo vilanodoz');
+                var song3 = new Song('tiesto');
+                song.jojo();
+                console.log(song.color);
             }
         </script>
         <style>
