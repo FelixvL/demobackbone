@@ -18,7 +18,11 @@
                         var cssColor = prompt("Please enter a CSS color:");
                         this.set({color: cssColor});
                     },
-                    color:'orange'
+                    color:'orange',
+                    defaults:{
+                        artist:'unknown',
+                        length:24
+                    }
                    
                 });
                 var song = new Song({color:'pink'});
@@ -29,6 +33,11 @@
                 var song3 = new Song('tiesto');
                 song.jojo();
                 console.log(song.color);
+                song.artist = 'piet';
+                console.log(song.artist);
+                console.log(song.get('length'));
+                console.log(song.length);
+                console.log(song);
             }
         </script>
         <style>
