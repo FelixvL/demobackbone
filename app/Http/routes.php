@@ -11,6 +11,16 @@
 |
 */
 
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/device',function(){
+    return '{"brand":"apple"}';
+});
+Route::post('/fruit',function(Request $request){
+        $data = $request->json()->all();
+        return Response('{"gezondheid":"jazeker"}', 200);
 });

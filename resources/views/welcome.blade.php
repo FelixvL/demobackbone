@@ -8,7 +8,7 @@
         <script src="{{URL::asset('/includes/underscore.js')}}"></script>
         <script src="{{URL::asset('/includes/backbone.js')}}"></script>
         <script>
-            function proberen(){
+            function probeersel1(){
                 var Song =  Backbone.Model.extend({
                     initialize: function(test) {
                         console.log("Song gemaakt"+test);
@@ -80,17 +80,13 @@
             function probeersel4(){
                 var Draak = Backbone.Model.extend({
                     validate: function(attrs) {
-                        if (attrs.prinses){
-                            return true; //geeft false
+                        if (this.has('prinses')){
                         }else{
                             alert('geen prinses');
                             return false;
                         }
                     },
                     initialize:function(){
-                        this.on("invalid", function(model, error) {
-                            alert(model + " " + error);
-                        });
                         a('draak is gemaakt');
                     }
                 });
@@ -103,6 +99,57 @@
                 a(draak.has('prinses'));
                 console.log(draak);
                 
+            }
+            function probeersel5(){
+                var Device = Backbone.Model.extend({
+                    urlRoot : '/device',
+                    brand:'unknown'
+                });
+                var device = new Device();
+                device.fetch({
+                    success: function(model){
+                        a(model.get('brand'));
+                        probeersel5callback(model);
+                    }
+                });
+                a('vb1'+device.get('brand'));
+            }
+            function probeersel5callback(devicemodel){
+                a('vb2'+devicemodel.get('brand'));
+            }
+            function probeersel6(){
+                var Fruit = Backbone.Model.extend({
+                    defaults: {
+                        Rijpheid: ""
+                    },
+                    initialize: function () {
+                        a('Fruit is aangemaakt');
+                        this.on("invalid", function (model, error) {
+                            console.log("Ik  wil wel weten wat ik eet: " + error)
+                        });
+                    },
+                    validate: function (attr) {
+                        if (!attr.Rijpheid) {
+                            return "Geen rijpheid opgegeven."
+                        }
+                    },
+                    urlRoot: 'fruit'
+                });
+                var fruit = new Fruit({ Rijpheid: "heel rijp" });
+                var saveOptions = {
+                    success: function (model, response, options) {
+                        a("Het is gesaved");
+                        console.log(model);
+                        console.log(response);
+                        console.log(options);
+                    },
+                    error: function (model, xhr, options) {
+                        a("Er is iets misgegaan");
+                    }
+                };
+                fruit.save({}, saveOptions);
+                var fruit2 = new Fruit();
+                fruit2.save({}, saveOptions);
             }
             function a(detekst){
                 var deOutput = document.getElementById('output');
@@ -142,10 +189,12 @@
     <body>
         <div class="container">
             <div class="content">
-                <input type="button" value="start proberen" onclick="proberen()">
-                <br>s<input type="button" value="start proberen 2" onclick="probeersel2()">
-                <br>s<input type="button" value="start proberen 3" onclick="probeersel3()">
-                <br>s<input type="button" value="start proberen 3" onclick="probeersel4()">
+                <br><input type="button" value="start proberen 1" onclick="probeersel1()">
+                <br><input type="button" value="start proberen 2" onclick="probeersel2()">
+                <br><input type="button" value="start proberen 3" onclick="probeersel3()">
+                <br><input type="button" value="start proberen 4" onclick="probeersel4()">
+                <br><input type="button" value="start proberen 5" onclick="probeersel5()">
+                <br><input type="button" value="start proberen 6" onclick="probeersel6()">
                 <div class="title" id="iets">Laravel 5</div>
             </div>
         </div>
